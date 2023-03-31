@@ -29,3 +29,10 @@ export interface IPokemon {
   is_default: boolean
   abilities: IPokemonAbility[]
 }
+
+export interface IPokemonGifs {
+  id: number
+  xPos: number
+  yPos: number
+  zIndex: number
+}
