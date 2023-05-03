@@ -50,16 +50,6 @@ for (let i = 1; i < 33; i++) {
   }
   const zIndex = Math.round(Math.random() * 20)
 
-  /* while (isOverlap(xPos, yPos).overlapped !== true) {
-    console.log(`TRY ${id}`)
-    if (isOverlap(xPos, yPos).issue == 'xPos') {
-      xPos = r() * maxX
-    }
-    if (isOverlap(xPos, yPos).issue == 'yPos') {
-      yPos += r() * maxY
-    }
-  } */
-
   if (!isOverlap(xPos, yPos)) {
     pokemonPics.push({
       id,
@@ -71,7 +61,7 @@ for (let i = 1; i < 33; i++) {
 }
 </script>
 <template lang="">
-  <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+  <div class="absolute top-0 left-0 w-full h-full pointer-events-none" v-if="!isLoading">
     <img
       v-for="(item, index) in pokemonPics"
       :key="index"
@@ -85,22 +75,32 @@ for (let i = 1; i < 33; i++) {
   <span v-if="isLoading">...loading...</span>
   <ScrollingText
     v-if="!isLoading"
-    :data="data.pokemon_species"
+    :data="data.pokemon_v2_pokemon"
     scrollDirection="normal"
-    linkName="pokemon-detail"
+    page="detail"
+    @click="store.goToPage"
   />
   <ScrollingText
     v-if="!isLoading"
-    :data="data.types"
+    :data="data.pokemon_v2_type"
     scrollDirection="reverse"
-    linkName="type-page"
+    page="type"
     @hover="store.updateBackgroundColor"
+    @click="store.goToPage"
   />
   <ScrollingText
     v-if="!isLoading"
-    :data="data.moves"
+    :data="data.pokemon_v2_move"
     scrollDirection="normal"
-    linkName="move-page"
+    page="move"
+    @click="store.goToPage"
+  />
+  <ScrollingText
+    v-if="!isLoading"
+    :data="data.pokemon_v2_pokemonhabitat"
+    scrollDirection="reverse"
+    page="habitat"
+    @click="store.goToPage"
   />
 </template>
 <style scoped></style>

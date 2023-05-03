@@ -9,13 +9,14 @@ const router = useRouter()
 const props = withDefaults(
   defineProps<{
     data: IAbility[] | IPokemonSpecies[] | IType[]
-    linkName: string
+    page: string
     scrollDirection: string
   }>(),
   { scrollDirection: 'normal' }
 )
 const emit = defineEmits<{
   (event: 'hover', color: string): void
+  (event: 'click', page: string, name: string): void
 }>()
 
 const duration = props.data.length * 3
@@ -38,9 +39,9 @@ const duration = props.data.length * 3
         <span
           role="link"
           class="hover:text-pink-400 hover:cursor-pointer"
-          @mouseenter="emit('hover', props.linkName == 'type-page' ? colors[item.name] : '')"
+          @mouseenter="emit('hover', props.page == 'type' ? colors[item.name] : '')"
           @mouseleave="emit('hover', '#FFFFFF')"
-          @click="router.push({ name: props.linkName, params: { name: item.name } })"
+          @click="emit('click', props.page, item.name)"
         >
           {{ item.name.replace('-', ' ') }}
         </span>

@@ -12,7 +12,7 @@ const { backgroundColor } = storeToRefs(store)
 
 <template>
   <div class="min-h-screen" :style="{ background: backgroundColor }">
-    <TheHeader />
+    <TheHeader @search="store.searchData" />
     <RouterView />
   </div>
 </template>
